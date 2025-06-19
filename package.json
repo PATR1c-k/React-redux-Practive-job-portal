@@ -1,0 +1,19 @@
+{
+  "name": "react-redux-study",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "client": "npm --prefix frontend run dev",
+    "server": "npm --prefix backend run dev",
+    "dev": "concurrently --names \"backend,frontend\" --prefix name \"npm run server\" \"npm run client\""
+  },
+  "keywords": [
+    "React-redux-study"
+  ],
+  "author": "Pratik Kaple",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
