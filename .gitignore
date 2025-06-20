@@ -23,5 +23,4 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Optional: Ignore coverage reports
 coverage/
