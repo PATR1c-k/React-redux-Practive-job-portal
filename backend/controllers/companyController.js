@@ -57,11 +57,9 @@ export const updateCompany = async (req, res) => {
 export const getCompanyByUser = async (req, res) => {
   try {
     const company = await Company.findOne({ ownerId: req.user._id });
-
     if (!company) {
-      return res
-        .status(404)
-        .json({ message: "Company not found for this user" });
+      res.status(404);
+      throw new Error("Company not found for this user");
     }
 
     res.json(company);

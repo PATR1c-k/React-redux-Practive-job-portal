@@ -7,6 +7,7 @@ import {
   jobListReducer,
   jobDeleteReducer,
 } from "./reducers/jobReducer";
+import { companyReducer } from "./reducers/companyReducer";
 
 // Combine all reducers
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   jobCreate: jobCreateReducer,
   jobList: jobListReducer,
   jobDelete: jobDeleteReducer,
+  company: companyReducer,
 });
 
 // Get user info from localStorage (for persisting login)
