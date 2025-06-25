@@ -21,13 +21,12 @@ export const createJob = (jobData) => async (dispatch, getState) => {
 
     const config = {
       headers: {
-        Authorization: `Bearer ${userInfo.token}`,
         "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
     const { data } = await axios.post("/api/jobs", jobData, config);
-
     dispatch({ type: JOB_CREATE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -37,11 +36,24 @@ export const createJob = (jobData) => async (dispatch, getState) => {
   }
 };
 
-export const listJobs = () => async (dispatch) => {
+export const listEmployerJobs = () => async (dispatch, getState) => {
   try {
     dispatch({ type: JOB_LIST_REQUEST });
 
-    const { data } = await axios.get("/api/jobs");
+    const {
+      auth: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(
+      `/api/jobs?ownerId=${userInfo._id}`,
+      config
+    );
 
     dispatch({ type: JOB_LIST_SUCCESS, payload: data });
   } catch (error) {

@@ -18,13 +18,16 @@ export const protect = async (req, res, next) => {
 
       // Attach user to request (excluding password)
       req.user = await User.findById(decoded.userId).select("-password");
-
+      if (!req.user) {
+        return res.status(401).json({ message: "User not found" });
+      }
+      console.log("User authenticated:", req.user._id);
       next();
     } catch (error) {
       console.error("Token failed:", error.message);
       res.status(401).json({ message: "Not authorized, token failed" });
     }
   } else {
-    res.status(401).json({ message: "Not authorized, no token" });
+    res.status(403).json({ message: "Not authorized, no token" });
   }
 };

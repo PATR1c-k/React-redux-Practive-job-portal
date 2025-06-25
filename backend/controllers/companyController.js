@@ -56,6 +56,8 @@ export const updateCompany = async (req, res) => {
 // Get logged-in user's company
 export const getCompanyByUser = async (req, res) => {
   try {
+    console.log("Fetching company for user:", req.user._id);
+
     const company = await Company.findOne({ ownerId: req.user._id });
     if (!company) {
       res.status(404);
